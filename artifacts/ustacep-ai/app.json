@@ -2,7 +2,13 @@
   "expo": {
     "name": "UstaCep AI",
     "slug": "ustacep-ai",
+    "owner": "mrwillows-team",
     "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "d4e3d09c-8ba0-467c-8d92-5c4a2118e35f"
+      }
+    },
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "ustacep-ai",
