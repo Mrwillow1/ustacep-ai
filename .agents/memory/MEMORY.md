@@ -1,0 +1,1 @@
+- [OpenAPI Zod export collisions](openapi-zod-exports.md) — code generation needs a post-step when a Zod response schema and emitted TypeScript type share a name.

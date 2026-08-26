@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: analysis
+    description: AI assisted work analysis
 paths:
   /healthz:
     get:
@@ -24,6 +26,28 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /analyze:
+    post:
+      operationId: analyzeWork
+      tags: [analysis]
+      summary: Analyze a work photo and job details
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyzeWorkRequest"
+      responses:
+        "200":
+          description: AI analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyzeWorkResult"
+        "400":
+          description: Invalid request
+        "503":
+          description: AI provider unavailable
 components:
   schemas:
     HealthStatus:
@@ -33,4 +57,66 @@ components:
           type: string
       required:
         - status
+    AnalyzeWorkRequest:
+      type: object
+      properties:
+        customerName:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        address:
+          type: string
+        notes:
+          type: string
+        imageDataUrls:
+          type: array
+          maxItems: 5
+          items:
+            type: string
+            description: A base64 data URL for an optimized work photo
+      required:
+        - title
+        - type
+    AnalyzeWorkResult:
+      type: object
+      properties:
+        workType:
+          type: string
+        description:
+          type: string
+        dimensions:
+          type: string
+        materials:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              quantity:
+                type: number
+              unit:
+                type: string
+              estimatedUnitPrice:
+                type: number
+            required: [name, quantity, unit, estimatedUnitPrice]
+        laborHours:
+          type: number
+        approximateCost:
+          type: number
+        isApproximate:
+          type: boolean
+        source:
+          type: string
+      required:
+        - workType
+        - description
+        - dimensions
+        - materials
+        - laborHours
+        - approximateCost
+        - isApproximate
+        - source
 

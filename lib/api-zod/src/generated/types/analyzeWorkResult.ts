@@ -5,26 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
-
-export interface AnalyzeWorkRequest {
-  customerName?: string;
-  title: string;
-  type: string;
-  address?: string;
-  notes?: string;
-  /** @maxItems 5 */
-  imageDataUrls?: string[];
-}
-
-export type AnalyzeWorkResultMaterialsItem = {
-  name: string;
-  quantity: number;
-  unit: string;
-  estimatedUnitPrice: number;
-};
+import type { AnalyzeWorkResultMaterialsItem } from './analyzeWorkResultMaterialsItem';
 
 export interface AnalyzeWorkResult {
   workType: string;
@@ -36,4 +17,3 @@ export interface AnalyzeWorkResult {
   isApproximate: boolean;
   source: string;
 }
-

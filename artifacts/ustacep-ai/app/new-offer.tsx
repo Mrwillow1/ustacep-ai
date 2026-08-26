@@ -17,7 +17,7 @@ export default function NewOfferScreen() {
   const set = (key: keyof typeof form, value: string) => setForm((current) => ({ ...current, [key]: value }));
   const addPhoto = async (camera: boolean) => {
     const result = camera ? await ImagePicker.launchCameraAsync({ mediaTypes: ['images'], quality: 0.7 }) : await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], allowsMultipleSelection: true, quality: 0.7 });
-    if (!result.canceled) setPhotos((current) => [...current, ...result.assets.map((asset) => asset.uri)]);
+    if (!result.canceled) setPhotos((current) => [...current, ...result.assets.map((asset) => asset.uri)].slice(0, 5));
   };
   const continueToAnalysis = () => {
     if (!form.customerName.trim() || !form.title.trim()) { setError('Müşteri adı ve iş başlığı zorunludur.'); return; }
