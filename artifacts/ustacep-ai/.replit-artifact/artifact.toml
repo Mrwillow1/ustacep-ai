@@ -1,0 +1,24 @@
+kind = "mobile"
+previewPath = "/ustacep-ai/"
+title = "UstaCep AI"
+description = "Ustaların iş fotoğraflarından hızlıca analiz, maliyet hesabı ve profesyonel fiyat teklifi oluşturmasını sağlayan Türkçe mobil uygulama."
+version = "1.0.0"
+id = "artifacts/ustacep-ai"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/ustacep-ai/" ]
+localPort = 19583
+
+[services.development]
+run = "pnpm --filter @workspace/ustacep-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ustacep-ai", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/ustacep-ai", "run", "serve" ]
+
+[services.env]
+PORT = "19583"
+BASE_PATH = "/ustacep-ai/"

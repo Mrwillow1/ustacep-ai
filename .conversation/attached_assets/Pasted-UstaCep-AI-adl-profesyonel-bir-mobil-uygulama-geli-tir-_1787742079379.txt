@@ -1,0 +1,189 @@
+UstaCep AI adlı profesyonel bir mobil uygulama geliştir.
+
+AMAÇ:
+Ustaların ve küçük işletmelerin bir işin fotoğrafını çekerek AI ile işi analiz etmesini, malzeme ve maliyet hesabı yapmasını ve müşteriye profesyonel fiyat teklifi göndermesini sağla.
+
+HEDEF KULLANICILAR:
+Boyacı, kaynakçı, demir doğramacı, mobilyacı, elektrikçi, tesisatçı, alçıpan, klima/PVC ustaları ve küçük imalat işletmeleri.
+
+ÖNCELİK:
+Önce çalışan MVP oluştur. Gereksiz özelliklerle projeyi karmaşıklaştırma.
+
+UYGULAMA AKIŞI:
+
+Ana Sayfa
+→ Yeni Teklif
+→ Fotoğraf Çek/Yükle
+→ AI Analizi
+→ Sonuçları Düzenle
+→ Maliyet Hesapla
+→ Teklif Oluştur
+→ PDF / Paylaş
+
+ANA SAYFA:
+- UstaCep AI logosu
+- "+ Yeni Teklif" büyük butonu
+- Bu ayki teklif sayısı
+- Bekleyen teklifler
+- Onaylanan teklifler
+- Tahmini ciro
+- Son teklifler
+
+YENİ TEKLİF:
+Alanlar:
+- Müşteri adı
+- Telefon
+- İş başlığı
+- İş türü
+- Adres
+- Not
+
+Fotoğraf:
+- Kameradan fotoğraf çek
+- Galeriden fotoğraf seç
+- Birden fazla fotoğraf ekleyebil
+
+İş türleri:
+Boyama, Kaynak, Demir Doğrama, Mobilya, Elektrik, Tesisat, Alçıpan, Klima, PVC, Makine İmalatı, Diğer.
+
+AI ANALİZ:
+Fotoğraf ve kullanıcı bilgilerini analiz ederek:
+- İş türü
+- İş açıklaması
+- Tahmini ölçüler
+- Gerekli malzemeler
+- Malzeme miktarları
+- Tahmini işçilik süresi
+- Yaklaşık maliyet
+
+oluştur.
+
+Fotoğraftan tahmin edilen ölçülerin kesin olmadığı açıkça gösterilsin:
+"Fotoğrafa dayalı yaklaşık değer."
+
+AI tarafından oluşturulan bütün sonuçlar kullanıcı tarafından düzenlenebilsin.
+
+AI entegrasyonunu değiştirilebilir bir servis/API yapısında oluştur. API anahtarlarını kaynak koduna yazma. İlk aşamada gerçek AI API'si yoksa çalışan mock AI servisi oluştur.
+
+MALİYET HESABI:
+- Malzeme
+- Miktar
+- Birim
+- Birim fiyat
+- İşçilik
+- Nakliye
+- Diğer giderler
+- İndirim
+- Kâr %
+- KDV %
+- Genel toplam
+
+hesaplansın.
+
+Kullanıcı bütün değerleri değiştirebilsin.
+
+Hesaplamalar gerçek matematiksel formüllerle yapılsın.
+
+TEKLİF:
+Profesyonel fiyat teklifi oluştur.
+
+İçerik:
+- Firma adı ve logo
+- Firma iletişim bilgileri
+- Müşteri bilgileri
+- Teklif numarası
+- Tarih
+- İş açıklaması
+- Malzeme/hizmet tablosu
+- Ara toplam
+- İşçilik
+- Nakliye
+- İndirim
+- KDV
+- Genel toplam
+- Notlar
+- Teklif geçerlilik süresi
+
+Teklif numarası otomatik olarak:
+UC-2026-0001
+formatında oluşturulsun.
+
+PDF oluştur ve Android paylaşım sistemiyle WhatsApp dahil diğer uygulamalara gönderilebilsin.
+
+MÜŞTERİLER:
+Müşteri ekleme, düzenleme, silme, arama ve müşterinin geçmiş tekliflerini görüntüleme.
+
+TEKLİFLER:
+Teklifleri listele.
+
+Durumlar:
+Taslak
+Gönderildi
+Onaylandı
+Reddedildi
+
+Arama ve filtreleme ekle.
+
+AYARLAR:
+- Firma adı
+- Logo
+- Telefon
+- E-posta
+- Adres
+- Vergi bilgileri
+- Varsayılan KDV
+- Varsayılan kâr oranı
+- Tema
+
+TASARIM:
+Modern, sade ve profesyonel bir mobil tasarım oluştur.
+Ustaların hızlı kullanabilmesi için büyük butonlar ve kolay navigasyon kullan.
+Türkçe karakterleri destekle.
+Açık/koyu tema ekle.
+Loading, hata ve boş durum ekranları oluştur.
+
+VERİ:
+Kullanıcı, müşteri, teklif ve teklif kalemlerini kalıcı olarak sakla.
+Uygulama yeniden açıldığında veriler kaybolmasın.
+
+PARA KAZANMA:
+Uygulamayı Freemium mimarisiyle hazırla.
+
+Ücretsiz:
+Ayda 5 teklif.
+
+Pro:
+Sınırsız teklif
+Sınırsız AI analizi
+Profesyonel PDF
+Logo
+Gelişmiş özellikler
+
+İlk MVP'de gerçek ödeme entegrasyonu zorunlu değil ancak ileride abonelik eklenebilecek şekilde kod yapısını hazırla.
+
+TEKNİK:
+Kod temiz, modüler ve production-ready olsun.
+Hata yönetimi ekle.
+API anahtarlarını güvenli tut.
+Fotoğrafları yüklemeden önce optimize et.
+Tüm butonlar gerçekten çalışsın.
+Sahte/çalışmayan ekran oluşturma.
+Uygulamanın build edilebilir durumda olmasını sağla.
+
+GELİŞTİRME SIRASI:
+
+1. Proje ve navigasyon
+2. Ana sayfa
+3. Yeni teklif
+4. Kamera/galeri
+5. AI servis altyapısı
+6. Maliyet hesaplama
+7. Teklif oluşturma
+8. PDF
+9. Paylaşım
+10. Müşteriler
+11. Teklif geçmişi
+12. Ayarlar
+
+ŞİMDİ:
+Önce çalışan MVP'nin temelini oluştur ve 1-8 arasındaki ana akışı çalışır hale getir. Kodlamaya başlamadan önce proje yapısını analiz et. İşlem bittikten sonra build/test çalıştır, hataları düzelt ve uygulamanın çalıştığını doğrula.
