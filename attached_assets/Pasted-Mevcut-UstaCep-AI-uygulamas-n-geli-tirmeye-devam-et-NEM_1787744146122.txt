@@ -1,0 +1,200 @@
+Mevcut UstaCep AI uygulamasını geliştirmeye devam et.
+
+ÖNEMLİ:
+Şu anda çalışan OpenAI API entegrasyonunu, API server'ı ve Expo workflow'u bozma.
+Önce mevcut sistemi incele ve çalışan özellikleri koru.
+
+Şimdi uygulamayı gerçek bir ticari uygulama seviyesine getir.
+
+1. TEKLİF SİSTEMİ
+
+Teklif oluşturulduğunda veritabanına kalıcı olarak kaydedilsin.
+
+Her teklife otomatik benzersiz numara ver:
+
+UC-2026-0001
+UC-2026-0002
+UC-2026-0003
+
+Teklifler uygulama kapatılıp açıldığında kaybolmamalı.
+
+Teklif durumu:
+- Taslak
+- Gönderildi
+- Onaylandı
+- Reddedildi
+
+2. TEKLİFLER SAYFASI
+
+Tüm teklifleri göster.
+
+Her kartta:
+- Teklif numarası
+- Müşteri
+- İş başlığı
+- Tarih
+- Toplam tutar
+- Durum
+
+Arama ve filtreleme ekle.
+
+Teklife tıklanınca detay ekranı açılsın.
+
+Detay ekranında:
+- Düzenle
+- Kopyala
+- PDF oluştur
+- Paylaş
+- Durum değiştir
+- Sil
+
+butonları olsun.
+
+3. MÜŞTERİLER
+
+Ayrı bir Müşteriler ekranı oluştur.
+
+Müşteri:
+- Ad soyad
+- Firma
+- Telefon
+- E-posta
+- Adres
+- Not
+
+bilgilerini kaydedebilsin.
+
+Müşteriye tıklanınca geçmiş teklifleri göster.
+
+4. MALİYET HESABI
+
+Mevcut maliyet sistemini koru ve kontrol et.
+
+Şu hesaplamalar doğru çalışmalı:
+
+Malzeme toplamı
++ İşçilik
++ Nakliye
++ Diğer giderler
+- İndirim
+= Ara toplam
+
+Ardından:
+
+Kâr oranı
+Kâr tutarı
+KDV
+Genel toplam
+
+hesaplansın.
+
+Tüm rakamlar kullanıcı tarafından değiştirilebilsin.
+
+5. PROFESYONEL PDF
+
+Teklif için profesyonel PDF oluştur.
+
+PDF'de:
+- Firma logosu
+- Firma adı
+- Telefon
+- E-posta
+- Adres
+- Müşteri bilgileri
+- Teklif numarası
+- Tarih
+- İş açıklaması
+- Malzeme/hizmet tablosu
+- Miktar
+- Birim fiyat
+- Toplam
+- İşçilik
+- Nakliye
+- İndirim
+- KDV
+- Genel toplam
+- Notlar
+
+bulunsun.
+
+Türkçe karakterleri destekle.
+
+6. PAYLAŞ
+
+PDF Android Share Sheet üzerinden paylaşılabilsin.
+
+WhatsApp, Gmail ve diğer uygulamalarla paylaşılabilsin.
+
+7. ANA SAYFA
+
+Dashboard'u gerçek verilerle çalıştır.
+
+Göster:
+- Bu ay oluşturulan teklif sayısı
+- Bekleyen teklif sayısı
+- Onaylanan teklif sayısı
+- Bu ay toplam teklif tutarı
+- Son teklifler
+
+8. AYARLAR
+
+Firma bilgileri ekranı oluştur:
+
+Firma adı
+Logo
+Telefon
+E-posta
+Adres
+Vergi numarası
+Vergi dairesi
+
+Bu bilgiler PDF tekliflerine otomatik aktarılsın.
+
+9. TASARIM
+
+Mevcut tasarımı modern ve profesyonel hale getir.
+
+Uygulama ticari bir B2B ürün gibi görünmeli.
+
+Tek elle kullanıma uygun büyük butonlar.
+
+Alt navigasyon:
+
+Ana Sayfa
+Teklifler
+Müşteriler
+Ayarlar
+
+10. HATA KONTROLÜ
+
+Tüm ekranları test et.
+
+Özellikle:
+
+Yeni teklif
+Fotoğraf
+OpenAI analizi
+AI sonuçları
+Maliyet
+Teklif kaydetme
+PDF
+Paylaşım
+
+akışını uçtan uca test et.
+
+Build/test hatalarını kendin düzelt.
+
+ÖNEMLİ:
+OpenAI API entegrasyonuna dokunma ve çalışan AI analizini bozma.
+
+Bu aşamada abonelik veya ödeme sistemi ekleme.
+
+Önce teklif + müşteri + PDF + paylaşım sistemini tamamen tamamla.
+
+İş bittikten sonra bana:
+1. Yapılan değişiklikleri
+2. Test sonuçlarını
+3. Kalan sorunları
+4. Play Store'a çıkmak için eksikleri
+
+raporla.
