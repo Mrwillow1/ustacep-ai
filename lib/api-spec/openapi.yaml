@@ -48,8 +48,206 @@ paths:
           description: Invalid request
         "503":
           description: AI provider unavailable
+  /data/bootstrap:
+    get:
+      operationId: getDataBootstrap
+      tags: [data]
+      summary: Load persisted UstaCep data
+      responses:
+        "200":
+          description: Persisted company, customer, and quote data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataBootstrap"
+  /data/company:
+    put:
+      operationId: saveCompany
+      tags: [data]
+      summary: Save company settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Company"
+      responses:
+        "200":
+          description: Saved company settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+  /data/customers:
+    post:
+      operationId: saveCustomer
+      tags: [data]
+      summary: Create or update a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        "200":
+          description: Saved customer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+  /data/customers/{customerId}:
+    put:
+      operationId: updateCustomer
+      tags: [data]
+      summary: Update a customer
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+      responses:
+        "200":
+          description: Updated customer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+    delete:
+      operationId: deleteCustomer
+      tags: [data]
+      summary: Delete a customer
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Customer deleted }
+  /data/quotes:
+    post:
+      operationId: saveQuote
+      tags: [data]
+      summary: Create or update a quote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Quote"
+      responses:
+        "201":
+          description: Saved quote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quote"
+  /data/quotes/{quoteId}:
+    put:
+      operationId: updateQuote
+      tags: [data]
+      summary: Update a quote
+      parameters:
+        - name: quoteId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Quote"
+      responses:
+        "200":
+          description: Updated quote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quote"
+    delete:
+      operationId: deleteQuote
+      tags: [data]
+      summary: Delete a quote
+      parameters:
+        - name: quoteId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "204": { description: Quote deleted }
 components:
   schemas:
+    Company:
+      type: object
+      properties:
+        name: { type: string }
+        phone: { type: string }
+        email: { type: string }
+        address: { type: string }
+        taxInfo: { type: string }
+        logoDataUrl: { type: string, nullable: true }
+        vatPercent: { type: number }
+        profitPercent: { type: number }
+        darkMode: { type: boolean }
+      required: [name, phone, email, address, taxInfo, vatPercent, profitPercent, darkMode]
+    Customer:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        firm: { type: string }
+        phone: { type: string }
+        email: { type: string }
+        address: { type: string }
+        notes: { type: string }
+      required: [name, firm, phone, email, address, notes]
+    QuoteItem:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        quantity: { type: number }
+        unit: { type: string }
+        unitPrice: { type: number }
+      required: [name, quantity, unit, unitPrice]
+    Quote:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string }
+        number: { type: string }
+        customerId: { type: string, nullable: true }
+        customerName: { type: string }
+        title: { type: string }
+        status: { type: string }
+        total: { type: number }
+        createdAt: { type: string, format: date-time }
+        data: { type: object, additionalProperties: true }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/QuoteItem" }
+      required: [customerName, title, status, total, data, items]
+    DataBootstrap:
+      type: object
+      properties:
+        company:
+          allOf:
+            - $ref: "#/components/schemas/Company"
+          nullable: true
+        customers:
+          type: array
+          items: { $ref: "#/components/schemas/Customer" }
+        quotes:
+          type: array
+          items: { $ref: "#/components/schemas/Quote" }
+      required: [customers, quotes]
     HealthStatus:
       type: object
       properties:

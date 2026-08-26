@@ -50,3 +50,236 @@ export const AnalyzeWorkResponse = zod.object({
 })
 
 
+/**
+ * @summary Load persisted UstaCep data
+ */
+export const GetDataBootstrapResponse = zod.object({
+  "company": zod.object({
+  "name": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "taxInfo": zod.string(),
+  "logoDataUrl": zod.string().nullish(),
+  "vatPercent": zod.number(),
+  "profitPercent": zod.number(),
+  "darkMode": zod.boolean()
+}).nullish(),
+  "customers": zod.array(zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "firm": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "notes": zod.string()
+})),
+  "quotes": zod.array(zod.object({
+  "id": zod.string().optional(),
+  "number": zod.string().optional(),
+  "customerId": zod.string().nullish(),
+  "customerName": zod.string(),
+  "title": zod.string(),
+  "status": zod.string(),
+  "total": zod.number(),
+  "createdAt": zod.coerce.date().optional(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "items": zod.array(zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "quantity": zod.number(),
+  "unit": zod.string(),
+  "unitPrice": zod.number()
+}))
+}))
+})
+
+
+/**
+ * @summary Save company settings
+ */
+export const SaveCompanyBody = zod.object({
+  "name": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "taxInfo": zod.string(),
+  "logoDataUrl": zod.string().nullish(),
+  "vatPercent": zod.number(),
+  "profitPercent": zod.number(),
+  "darkMode": zod.boolean()
+})
+
+export const SaveCompanyResponse = zod.object({
+  "name": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "taxInfo": zod.string(),
+  "logoDataUrl": zod.string().nullish(),
+  "vatPercent": zod.number(),
+  "profitPercent": zod.number(),
+  "darkMode": zod.boolean()
+})
+
+
+/**
+ * @summary Create or update a customer
+ */
+export const SaveCustomerBody = zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "firm": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "notes": zod.string()
+})
+
+export const SaveCustomerResponse = zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "firm": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "notes": zod.string()
+})
+
+
+/**
+ * @summary Update a customer
+ */
+export const UpdateCustomerParams = zod.object({
+  "customerId": zod.coerce.string()
+})
+
+export const UpdateCustomerBody = zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "firm": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "notes": zod.string()
+})
+
+export const UpdateCustomerResponse = zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "firm": zod.string(),
+  "phone": zod.string(),
+  "email": zod.string(),
+  "address": zod.string(),
+  "notes": zod.string()
+})
+
+
+/**
+ * @summary Delete a customer
+ */
+export const DeleteCustomerParams = zod.object({
+  "customerId": zod.coerce.string()
+})
+
+export const DeleteCustomerResponse = zod.void()
+
+
+/**
+ * @summary Create or update a quote
+ */
+export const SaveQuoteBody = zod.object({
+  "id": zod.string().optional(),
+  "number": zod.string().optional(),
+  "customerId": zod.string().nullish(),
+  "customerName": zod.string(),
+  "title": zod.string(),
+  "status": zod.string(),
+  "total": zod.number(),
+  "createdAt": zod.coerce.date().optional(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "items": zod.array(zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "quantity": zod.number(),
+  "unit": zod.string(),
+  "unitPrice": zod.number()
+}))
+})
+
+export const SaveQuoteResponse = zod.object({
+  "id": zod.string().optional(),
+  "number": zod.string().optional(),
+  "customerId": zod.string().nullish(),
+  "customerName": zod.string(),
+  "title": zod.string(),
+  "status": zod.string(),
+  "total": zod.number(),
+  "createdAt": zod.coerce.date().optional(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "items": zod.array(zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "quantity": zod.number(),
+  "unit": zod.string(),
+  "unitPrice": zod.number()
+}))
+})
+
+
+/**
+ * @summary Update a quote
+ */
+export const UpdateQuoteParams = zod.object({
+  "quoteId": zod.coerce.string()
+})
+
+export const UpdateQuoteBody = zod.object({
+  "id": zod.string().optional(),
+  "number": zod.string().optional(),
+  "customerId": zod.string().nullish(),
+  "customerName": zod.string(),
+  "title": zod.string(),
+  "status": zod.string(),
+  "total": zod.number(),
+  "createdAt": zod.coerce.date().optional(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "items": zod.array(zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "quantity": zod.number(),
+  "unit": zod.string(),
+  "unitPrice": zod.number()
+}))
+})
+
+export const UpdateQuoteResponse = zod.object({
+  "id": zod.string().optional(),
+  "number": zod.string().optional(),
+  "customerId": zod.string().nullish(),
+  "customerName": zod.string(),
+  "title": zod.string(),
+  "status": zod.string(),
+  "total": zod.number(),
+  "createdAt": zod.coerce.date().optional(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "items": zod.array(zod.object({
+  "id": zod.string().optional(),
+  "name": zod.string(),
+  "quantity": zod.number(),
+  "unit": zod.string(),
+  "unitPrice": zod.number()
+}))
+})
+
+
+/**
+ * @summary Delete a quote
+ */
+export const DeleteQuoteParams = zod.object({
+  "quoteId": zod.coerce.string()
+})
+
+export const DeleteQuoteResponse = zod.void()
+
+

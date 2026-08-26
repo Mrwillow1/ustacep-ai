@@ -5,6 +5,58 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+export interface Company {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  taxInfo: string;
+  logoDataUrl?: string | null;
+  vatPercent: number;
+  profitPercent: number;
+  darkMode: boolean;
+}
+
+export interface Customer {
+  id?: string;
+  name: string;
+  firm: string;
+  phone: string;
+  email: string;
+  address: string;
+  notes: string;
+}
+
+export interface QuoteItem {
+  id?: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  unitPrice: number;
+}
+
+export type QuoteData = { [key: string]: unknown };
+
+export interface Quote {
+  id?: string;
+  number?: string;
+  customerId?: string | null;
+  customerName: string;
+  title: string;
+  status: string;
+  total: number;
+  createdAt?: string;
+  data: QuoteData;
+  items: QuoteItem[];
+  [key: string]: unknown;
+ }
+
+export interface DataBootstrap {
+  company?: Company | null;
+  customers: Customer[];
+  quotes: Quote[];
+}
+
 export interface HealthStatus {
   status: string;
 }

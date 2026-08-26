@@ -21,9 +21,10 @@ SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
 const apiDomain = process.env.EXPO_PUBLIC_DOMAIN;
+const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? (apiDomain ? `https://${apiDomain}` : null);
 
-if (apiDomain) {
-  setBaseUrl(`https://${apiDomain}`);
+if (apiUrl) {
+  setBaseUrl(apiUrl);
 }
 
 function RootLayoutNav() {
@@ -34,6 +35,7 @@ function RootLayoutNav() {
       <Stack.Screen name="analysis" options={{ headerShown: false }} />
       <Stack.Screen name="cost" options={{ headerShown: false }} />
       <Stack.Screen name="preview" options={{ headerShown: false }} />
+      <Stack.Screen name="customer" options={{ headerShown: false }} />
     </Stack>
   );
 }

@@ -15,7 +15,7 @@ export default function HomeScreen() {
   const monthQuotes = quotes.filter((quote) => new Date(quote.createdAt).getMonth() === currentMonth);
   const pending = quotes.filter((quote) => quote.status === 'Gönderildi').length;
   const approved = quotes.filter((quote) => quote.status === 'Onaylandı').length;
-  const revenue = quotes.filter((quote) => quote.status === 'Onaylandı').reduce((sum, quote) => sum + quote.total, 0);
+  const revenue = monthQuotes.reduce((sum, quote) => sum + quote.total, 0);
   return (
     <View style={[styles.page, { backgroundColor: colors.background }]}>
       <ScrollView contentContainerStyle={[styles.content, { paddingTop: Math.max(insets.top, 20) + 10, paddingBottom: 110 }]} showsVerticalScrollIndicator={false}>
