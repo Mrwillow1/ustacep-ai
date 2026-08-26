@@ -1,1 +1,2 @@
 - [OpenAPI Zod export collisions](openapi-zod-exports.md) — code generation needs a post-step when a Zod response schema and emitted TypeScript type share a name.
+- [GitHub push authentication](github-push-auth.md) — fine-grained tokens need repository Contents write access; use safe askpass and verify the remote SHA.
