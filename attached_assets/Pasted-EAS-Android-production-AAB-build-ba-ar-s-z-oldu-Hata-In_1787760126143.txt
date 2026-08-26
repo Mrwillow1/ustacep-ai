@@ -1,0 +1,58 @@
+EAS Android production AAB build başarısız oldu.
+
+Hata:
+Install dependencies
+pnpm install --frozen-lockfile
+exited with non-zero code: 1
+
+EAS build project root:
+artifacts/ustacep-ai
+
+Lütfen önce teşhis et, hemen build başlatma.
+
+Yapılacaklar:
+
+1. artifacts/ustacep-ai/package.json dosyasını kontrol et.
+2. artifacts/ustacep-ai/pnpm-lock.yaml dosyasını kontrol et.
+3. package.json ile pnpm-lock.yaml arasında dependency/version uyumsuzluğu var mı tespit et.
+4. Projede birden fazla package manager lockfile'ı varsa tespit et:
+   - pnpm-lock.yaml
+   - package-lock.json
+   - yarn.lock
+   - bun.lock
+   Bunların hangisinin kullanılacağına karar ver ve gereksiz/çakışan lockfile'ları uygulama kökünden kaldır.
+5. Uygulamanın gerçek package manager'ını pnpm olarak kullanacaksan:
+   - artifacts/ustacep-ai dizininde pnpm install çalıştır.
+   - pnpm-lock.yaml dosyasını package.json ile güncelle.
+   - npm/yarn/bun lockfile'larını uygulamanın kökünde bırakma.
+6. package.json içindeki dependency'leri değiştirmek gerekiyorsa Expo SDK ile uyumlu sürümleri koru.
+7. node_modules veya secret dosyalarını GitHub'a commit etme.
+8. .env, .env.local, .env.production ve signing dosyalarını koru.
+9. Sonrasında:
+   - pnpm install --frozen-lockfile
+   komutunun artifacts/ustacep-ai dizininde başarıyla çalıştığını doğrula.
+10. Expo dependency uyumluluğunu kontrol et:
+   npx expo install --check
+   Gerekirse uyumsuz paketleri düzelt.
+11. Git diff'i incele.
+12. Sadece gerekli dosyaları commit et.
+13. GitHub main branch'e push et.
+14. Push sonrası local main ve remote main SHA değerlerini doğrula.
+15. Bu aşamada EAS build'i otomatik olarak tekrar başlatma.
+
+Önemli:
+- package.json dependency'lerini gereksiz yere güncelleme.
+- Expo SDK sürümünü değiştirme.
+- OpenAI API entegrasyonuna dokunma.
+- production API URL'sini değiştirme.
+- Android package name com.ustacep.ai değerini değiştirme.
+- EAS project ID'yi değiştirme.
+- Secret/token değerlerini loglama veya dosyaya yazma.
+
+İşlem sonunda bana:
+1. Sorunun kesin nedenini,
+2. Değiştirilen dosyaları,
+3. pnpm install --frozen-lockfile sonucunu,
+4. Git commit SHA'sını,
+5. GitHub remote SHA'sını
+raporla.
