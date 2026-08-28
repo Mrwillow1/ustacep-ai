@@ -1,0 +1,105 @@
+EAS build artık pnpm-lock.yaml dosyasını görüyor. Önceki lockfile bulunamıyor hatası çözüldü.
+
+ŞİMDİKİ KESİN HATA:
+
+Failure reason:
+specifiers in the lockfile don't match specifiers in package.json:
+
+2 dependencies are mismatched:
+- expo (lockfile: ~54.0.27, manifest: ~54.0.37)
+- react (lockfile: catalog:, manifest: 19.1.0)
+
+pnpm install --frozen-lockfile exited with non-zero code: 1
+
+BU HATAYI DÜZELT.
+
+ÖNEMLİ:
+- Power/Max kullanma.
+- Yeni özellik geliştirme.
+- UI değiştirme.
+- Uygulama koduna dokunma.
+- Expo SDK'yı değiştirme.
+- React Native sürümünü değiştirme.
+- package.json'daki mevcut sürümleri kendiliğinden değiştirme.
+- Dependency ekleme/çıkarma yapma.
+- Google Play'e yayınlama.
+- EAS build başlatma.
+
+AMAÇ:
+Mevcut package.json ile pnpm-lock.yaml'ın tamamen senkron hale gelmesini sağlamak.
+
+ÖNCE İNCELE:
+
+1. artifacts/ustacep-ai/package.json
+2. root package.json
+3. root pnpm-lock.yaml
+4. pnpm-workspace.yaml
+5. artifacts/ustacep-ai/eas.json
+
+Özellikle:
+- package.json'daki expo sürümünü
+- package.json'daki react sürümünü
+- package.json'daki react-native sürümünü
+- pnpm-lock.yaml içindeki ilgili importer'ı
+karşılaştır.
+
+EĞER package.json DOĞRU VE LOCKFILE ESKİ İSE:
+
+package.json'ı değiştirme.
+
+Mevcut package.json'a göre lockfile'ı yeniden oluştur/güncelle.
+
+Ama bunu dependency sürümlerini yükseltmeden yap.
+
+Tercihen frozen-lockfile olmadan yalnızca lockfile'ı güncelleyecek kontrollü pnpm komutunu kullan.
+
+Daha sonra:
+
+pnpm install --frozen-lockfile
+
+çalıştır.
+
+Beklenen sonuç:
+
+Done
+exit code: 0
+
+Ayrıca Expo dependency kontrolü yap.
+
+ÖZEL OLARAK:
+Expo'nun package.json'daki mevcut sürümünü lockfile'a uydur.
+React'in package.json'daki mevcut sürümünü lockfile'a uydur.
+
+React'i veya Expo'yu yeni bir sürüme yükseltme.
+
+Eğer workspace/catalog yapısı React için bilinçli olarak kullanılıyorsa bunu bozma; ancak EAS'ın frozen-lockfile kontrolünde package.json ve lockfile specifier'larının birebir uyumlu olmasını sağla.
+
+SONRA KONTROL ET:
+
+pnpm install --frozen-lockfile
+git diff --check
+
+Ayrıca:
+- package.json değişmemiş olmalı veya zorunlu bir değişiklik varsa bunu açıkça belirt.
+- pnpm-lock.yaml değişikliğinin yalnızca mevcut manifest ile senkronizasyon amaçlı olduğunu doğrula.
+- package-lock.json oluşturma.
+- yarn.lock oluşturma.
+- bun.lock oluşturma.
+- ikinci pnpm-lock.yaml oluşturma.
+
+EAS build'i BAŞLATMA.
+
+GitHub'a commit ve push yap.
+
+Sonunda bana şunları bildir:
+
+1. Değişen dosyalar
+2. package.json değişti mi?
+3. pnpm-lock.yaml neden değişti?
+4. pnpm install --frozen-lockfile sonucu
+5. git diff --check sonucu
+6. commit SHA
+7. remote main SHA
+8. SHA_MATCH sonucu
+
+Bu aşamada yalnızca dependency lockfile senkronizasyonunu düzelt.
