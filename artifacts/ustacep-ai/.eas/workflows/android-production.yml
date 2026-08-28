@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+defaults:
+  tools:
+    pnpm: 10.14.0
+
 jobs:
   build_android:
     name: Build Android production AAB
@@ -12,3 +16,7 @@ jobs:
     params:
       platform: android
       profile: production
+    steps:
+      - uses: eas/build
+        with:
+          working_directory: .
