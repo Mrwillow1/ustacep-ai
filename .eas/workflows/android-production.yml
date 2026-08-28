@@ -5,13 +5,18 @@ on:
     branches:
       - main
 
+defaults:
+  tools:
+    pnpm: 10.26.1
+
 jobs:
   build_android:
     name: Build Android production AAB
     type: build
-    defaults:
-      run:
-        working_directory: ./artifacts/ustacep-ai
     params:
       platform: android
       profile: production
+    steps:
+      - uses: eas/build
+        with:
+          working_directory: ./artifacts/ustacep-ai
