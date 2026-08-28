@@ -1,0 +1,94 @@
+UstaCep AI projesindeki EAS Android Production AAB build hatasını düzelt.
+
+ÖNEMLİ:
+- Power veya Max model kullanma.
+- Yeni özellik geliştirme.
+- UI değiştirme.
+- Uygulamanın mevcut işlevlerini değiştirme.
+- Dependency sürümlerini gereksiz yere değiştirme.
+- Expo SDK sürümünü değiştirme.
+- Google Play'e yayın yapma.
+- EAS build'i gereksiz yere başlatma.
+- Sadece build sistemindeki problemi teşhis et ve düzelt.
+- Çalışmayı mümkün olduğunca küçük ve güvenli bir değişiklikle tamamla.
+
+PROJE YAPISI:
+
+Repository root:
+/
+├── .eas/
+│   └── workflows/
+├── artifacts/
+│   └── ustacep-ai/
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── lib/
+├── scripts/
+└── diğer dosyalar
+
+Expo uygulaması:
+artifacts/ustacep-ai
+
+GitHub repository:
+Mrwillow1/ustacep-ai
+
+Mevcut EAS workflow:
+.eas/workflows/android-production.yml
+
+Mevcut problem:
+EAS Workflow Android Production AAB çalışıyor ancak Install dependencies aşamasında şu hata oluşuyor:
+
+pnpm install --frozen-lockfile
+exited with non-zero code: 1
+
+Daha önce tespit edilen durum:
+- Repository root'ta pnpm-lock.yaml var.
+- Repository root'ta pnpm-workspace.yaml var.
+- Expo uygulaması artifacts/ustacep-ai altında.
+- artifacts/ustacep-ai/package.json mevcut.
+- App ile root pnpm-lock.yaml importer'ının uyumlu olduğu daha önce doğrulandı.
+- Yerel simülasyonda doğru workspace kökünden:
+  pnpm install --frozen-lockfile
+  başarılı oluyor.
+- Ancak EAS build ortamında dependency install aşaması başarısız oluyor.
+- Önceki workflow'a defaults.run.working_directory eklenmesine rağmen EAS'ın hazır `type: build` job'ı dependency install aşamasında yine başarısız oldu.
+
+HEDEF:
+
+EAS'ın Android Production AAB build'inin şu yapıyla sorunsuz çalışmasını sağla:
+
+GitHub main
+   ↓
+EAS Workflow
+   ↓
+Android Production
+   ↓
+pnpm dependencies
+   ↓
+Expo/EAS build
+   ↓
+AAB
+
+Öncelikle mevcut dosyaları incele:
+
+1. pnpm-workspace.yaml
+2. pnpm-lock.yaml
+3. root package.json
+4. artifacts/ustacep-ai/package.json
+5. artifacts/ustacep-ai/eas.json
+6. artifacts/ustacep-ai/app.json veya app.config.*
+7. .eas/workflows/android-production.yml
+8. .gitignore
+9. .npmrc
+
+Ardından EAS'ın neden artifacts/ustacep-ai altında frozen-lockfile install yaparken root pnpm-lock.yaml dosyasını kullanamadığını kesin olarak belirle.
+
+ÇÖZÜM İÇİN ÖNCELİK SIRASI:
+
+1. Önce mevcut monorepo yapısını koruyarak çözmeyi dene.
+2. EAS Workflow'un resmi desteklediği çalışma dizini/monorepo yöntemini kullan.
+3. Gerekirse workflow'u EAS'ın hazır build job'ının dependency install davranışına uygun şekilde değiştir.
+4. Gerekirse Expo uygulamasını repository root'a taşımayı değerlendir, ANCAK bunu ancak mevcut yapıyı bozmadan ve tüm path/config referanslarını güvenli şekilde güncelleyebileceğinden eminsen yap.
+5. Gereksiz dosya kopyalama yapma.
+6. İkinci bir package manager
