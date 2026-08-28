@@ -1,0 +1,70 @@
+EAS build tekrar başarısız oldu. Önceki düzeltme sorunu çözmedi.
+
+YENİ BUILD LOGUNUN KESİN HATASI:
+
+We detected that 'artifacts/ustacep-ai' is a pnpm workspace
+
+Running "pnpm install --frozen-lockfile" in /home/expo/workingdir/build directory
+
+Scope: all 9 workspace projects
+
+WARN Ignoring not compatible lock file at /home/expo/workingdir/build/pnpm-lock.yaml
+
+ERR_PNPM_NO_LOCKFILE Cannot install with "frozen-lockfile" because pnpm-lock.yaml is absent
+
+pnpm install --frozen-lockfile exited with non-zero code: 1
+
+ÖNEMLİ:
+Bu kez tahmin yapma. EAS build source/archive yapısını ve pnpm workspace yapısını incele.
+
+Repository yapısı:
+
+/
+├── .eas/
+│   └── workflows/
+├── artifacts/
+│   └── ustacep-ai/
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+└── ...
+
+Expo uygulaması:
+artifacts/ustacep-ai
+
+GitHub:
+Mrwillow1/ustacep-ai
+
+AMAÇ:
+EAS'ın build ortamında artifacts/ustacep-ai uygulamasının dependency install aşamasında ROOT pnpm-lock.yaml dosyasını kullanmasını sağlamak.
+
+Önce şu dosyaları oku:
+- pnpm-workspace.yaml
+- pnpm-lock.yaml
+- root package.json
+- artifacts/ustacep-ai/package.json
+- artifacts/ustacep-ai/eas.json
+- artifacts/ustacep-ai/app.json veya app.config.*
+- .eas/workflows/android-production.yml
+- .gitignore
+- .npmrc
+
+Özellikle şu konuyu araştır:
+
+EAS build sırasında repository root yerine artifacts/ustacep-ai'nin workspace olarak algılanması neden oluyor?
+
+EAS'ın "pnpm install --frozen-lockfile" adımına root pnpm-lock.yaml neden doğru şekilde ulaşmıyor?
+
+Öncelik sırası:
+
+1. Monorepo yapısını koruyarak çöz.
+2. EAS'ın resmi desteklediği monorepo/build source yöntemini kullan.
+3. Root pnpm-lock.yaml dosyasının EAS build archive içinde bulunmasını sağla.
+4. pnpm-workspace.yaml'ın workspace root'u doğru göstermesini sağla.
+5. EAS workflow'un source/root directory davranışını düzelt.
+6. Gerekirse uygulamayı repository root'a taşıma seçeneğini değerlendir; ancak bunu SON ÇARE olarak yap ve mevcut uygulamanın dosyalarını/path'lerini bozmadan gerçekleştir.
+
+KESİNLİKLE:
+- package-lock.json oluşturma
+- yarn.lock oluşturma
+- bun.lock oluşturma
