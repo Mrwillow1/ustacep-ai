@@ -17,6 +17,7 @@ jobs:
       platform: android
       profile: production
     steps:
+      - uses: eas/get_credentials_for_build_triggered_by_github_integration
       - uses: eas/build
         with:
           working_directory: .
