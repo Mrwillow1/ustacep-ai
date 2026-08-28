@@ -17,7 +17,28 @@ jobs:
       platform: android
       profile: production
     steps:
-      - uses: eas/get_credentials_for_build_triggered_by_github_integration
-      - uses: eas/build
+      - uses: eas/checkout
+      - uses: eas/use_npm_token
+        with:
+          working_directory: .
+      - uses: eas/install_node_modules
+        with:
+          working_directory: .
+      - uses: eas/resolve_build_config
+        with:
+          working_directory: .
+      - uses: eas/prebuild
+        with:
+          working_directory: .
+      - uses: eas/inject_android_credentials
+        with:
+          working_directory: .
+      - uses: eas/configure_android_version
+        with:
+          working_directory: .
+      - uses: eas/run_gradle
+        with:
+          working_directory: .
+      - uses: eas/find_and_upload_build_artifacts
         with:
           working_directory: .
