@@ -11,7 +11,7 @@
         "buildType": "app-bundle"
       },
       "experimental": {
-        "prebuildCommand": "expo prebuild --no-install --skip-dependency-update"
+        "prebuildCommand": "expo prebuild --no-install --skip-dependency-update expo,react,react-native"
       },
       "env": {
         "EXPO_PUBLIC_API_URL": "https://usta-cep-ai--mrwillow.replit.app"
